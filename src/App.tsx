@@ -1,16 +1,15 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { Header } from "./components/header/Header";
+import { Masonry } from "./components/masonry/Masonry";
 
-function App() {
+export function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>use-masonry</p>
-      </header>
+      <Header />
+
+      <Masonry />
     </div>
   );
 }
-
-export default App;
