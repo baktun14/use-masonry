@@ -1,6 +1,7 @@
 import React from "react";
 import { MasonryItemModel } from "../../hooks/useMasonry";
 import { getPrefixedTranslate } from "../../utils/cssHelpers";
+import "./MasonryItem.css";
 
 interface IMasonryItemProps {
   item: MasonryItemModel;
