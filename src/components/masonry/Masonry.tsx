@@ -1,9 +1,10 @@
-import React, { useRef, useState, useLayoutEffect } from "react";
+import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import "./Masonry.css";
-import { MasonryItem, useMasonry } from "../../hooks/useMasonry";
+import { MasonryItemModel, useMasonry } from "../../hooks/useMasonry";
 import { getPrefixedTranslate } from "../../utils/cssHelpers";
+import { MasonryItem } from "../masonryItem/MasonryItem";
 
-const items: Array<MasonryItem> = [
+const items: Array<MasonryItemModel> = [
   { originalWidth: 200, originalHeight: 400 },
   { originalWidth: 400, originalHeight: 300 },
   { originalWidth: 600, originalHeight: 400 },
@@ -26,21 +27,7 @@ export function Masonry() {
     <div ref={containerRef} id="container" style={{ height: masonryHeight }}>
       {masonry &&
         masonry.map((item, i) => {
-          const containerStyles: React.CSSProperties = {
-            width: item.width,
-            height: item.height,
-            ...getPrefixedTranslate(item.left, item.top),
-          };
-
-          return (
-            <div key={i} className="masonry-item" style={containerStyles}>
-              <div className="masonry-item-container">
-                <img
-                  src={`http://placehold.it/${item.originalWidth}x${item.originalHeight}`}
-                />
-              </div>
-            </div>
-          );
+          return <MasonryItem item={item} key={i} />;
         })}
     </div>
   );

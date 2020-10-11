@@ -2,18 +2,3 @@
   width: 100%;
   position: relative;
 }
-
-.masonry-item {
-  position: absolute;
-  padding: 5px;
-  transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
-}
-
-.masonry-item img {
-  width: 100%;
-  height: 100%;
-}
-
-.masonry-item-container {
-  position: relative;
-}

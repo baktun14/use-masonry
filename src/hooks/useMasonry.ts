@@ -1,6 +1,4 @@
-import React from "react";
-
-export interface MasonryItem {
+export interface MasonryItemModel {
   originalWidth: number;
   originalHeight: number;
   width?: number;
@@ -9,22 +7,22 @@ export interface MasonryItem {
   left?: number;
 }
 
-export function useMasonry(items: Array<MasonryItem>, containerWidth: number, numberOfColumns: number = 3, gutterPadding: number = 5) {
+export function useMasonry(items: Array<MasonryItemModel>, containerWidth: number, numberOfColumns: number = 3, gutterPadding: number = 5) {
   if (containerWidth) {
     const colWidth: number = containerWidth / numberOfColumns;
-    const masonry: Array<Array<MasonryItem>> = [];
+    const masonry: Array<Array<MasonryItemModel>> = [];
 
     for (let i = 0; i < numberOfColumns; i++) {
       masonry.push([]);
     }
 
-    const insertInMasonry = (item: MasonryItem) => {
-      const computeColHeight = (col: Array<MasonryItem> = []) => col.length > 1
+    const insertInMasonry = (item: MasonryItemModel) => {
+      const computeColHeight = (col: Array<MasonryItemModel> = []) => col.length > 1
         ? col[col.length - 1].top + col[col.length - 1].height
         : 0;
       const shortesCol = masonry.minBy(col => computeColHeight(col));
       const colIndex = masonry.indexOf(shortesCol);
-      const currentLastColItem: MasonryItem = shortesCol[shortesCol.length - 1] || {};
+      const currentLastColItem: MasonryItemModel = shortesCol[shortesCol.length - 1] || {};
       const hasLastColItem = Object.keys(currentLastColItem).length > 0 && currentLastColItem.constructor === Object;
 
       masonry[colIndex] = [...shortesCol, {
@@ -48,7 +46,7 @@ export function useMasonry(items: Array<MasonryItem>, containerWidth: number, nu
     });
 
     const flattedMasonry = masonry.flat(1);
-    const lowestBlock: MasonryItem = flattedMasonry.maxBy(item => item.top + item.height);
+    const lowestBlock: MasonryItemModel = flattedMasonry.maxBy(item => item.top + item.height);
     const masonryHeight = lowestBlock ? lowestBlock.top + lowestBlock.height : 0;
 
     return { masonry: flattedMasonry, masonryHeight }
