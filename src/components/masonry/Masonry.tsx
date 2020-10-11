@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import "./Masonry.css";
 import { MasonryItemModel, useMasonry } from "../../hooks/useMasonry";
-import { getPrefixedTranslate } from "../../utils/cssHelpers";
 import { MasonryItem } from "../masonryItem/MasonryItem";
 import { debounce } from "../../utils/debounce";
 
@@ -19,16 +18,18 @@ const items: Array<MasonryItemModel> = [
   { originalWidth: 300, originalHeight: 700 },
 ];
 
-interface IWindowSize {
-  width: number;
-  height: number;
+interface IMasonryProps {
+  numberOfColumns: number;
 }
 
-export function Masonry() {
+export function Masonry({ numberOfColumns }: IMasonryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
-  const [windowSize, setWindowSize] = useState<IWindowSize>(null);
-  const { masonry, masonryHeight } = useMasonry(items, containerWidth);
+  const { masonry, masonryHeight } = useMasonry(
+    items,
+    containerWidth,
+    numberOfColumns
+  );
 
   useLayoutEffect(() => {
     updateContainerWidth();
@@ -36,11 +37,6 @@ export function Masonry() {
 
   useEffect(() => {
     const handleResize = (e: Event) => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-
       updateContainerWidth();
     };
 

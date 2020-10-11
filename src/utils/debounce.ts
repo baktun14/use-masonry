@@ -1,3 +1,8 @@
+/**
+ * Debounce a function of a set time
+ * @param func 
+ * @param waitFor 
+ */
 export const debounce = <F extends (...args: any[]) => any>(func: F, waitFor: number) => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
 
