@@ -10,19 +10,12 @@ import { MasonryItemModel, useMasonry } from "../../hooks/useMasonry";
 import { MasonryItem } from "../masonryItem/MasonryItem";
 import { debounce } from "../../utils/debounce";
 
-const items: Array<MasonryItemModel> = [
-  { originalWidth: 200, originalHeight: 400 },
-  { originalWidth: 400, originalHeight: 300 },
-  { originalWidth: 600, originalHeight: 400 },
-  { originalWidth: 200, originalHeight: 300 },
-  { originalWidth: 300, originalHeight: 700 },
-];
-
 interface IMasonryProps {
+  items: Array<MasonryItemModel>;
   numberOfColumns: number;
 }
 
-export function Masonry({ numberOfColumns }: IMasonryProps) {
+export function Masonry({ numberOfColumns, items }: IMasonryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const { masonry, masonryHeight } = useMasonry(

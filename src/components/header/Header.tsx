@@ -5,11 +5,13 @@ import { Button, Input } from "@chakra-ui/core";
 interface IHeaderProps {
   numberOfColumns: number;
   updateNumberOfColumns: (numberOfColumns: number) => any;
+  addMoreItems: () => any;
 }
 
 export function Header({
   updateNumberOfColumns,
   numberOfColumns,
+  addMoreItems,
 }: IHeaderProps) {
   return (
     <header className="App-header">
@@ -25,7 +27,13 @@ export function Header({
           min={1}
           max={12}
         />
-        <Button onClick={() => updateNumberOfColumns(numberOfColumns)} />
+        <Button
+          onClick={() => addMoreItems()}
+          variantColor="teal"
+          variant="solid"
+        >
+          Add more items
+        </Button>
       </div>
     </header>
   );

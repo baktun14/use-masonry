@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
 export interface MasonryItemModel {
+  id: string;
   originalWidth: number;
   originalHeight: number;
   width?: number;
@@ -26,7 +27,7 @@ interface MasonryColumn {
 }
 
 function calculateMasonry(items: Array<MasonryItemModel>, containerWidth: number, numberOfColumns: number, gutterPadding: number) {
-  if (containerWidth && containerWidth > 0) {
+  if (containerWidth && containerWidth > 0 && items && items.length > 0) {
     const colWidth: number = containerWidth / numberOfColumns;
     const masonry: Array<MasonryColumn> = [];
 
@@ -78,6 +79,6 @@ function calculateMasonry(items: Array<MasonryItemModel>, containerWidth: number
 
     return { masonry: flattedMasonry, masonryHeight }
   } else {
-    return {};
+    return { masonry: [], masonryHeight: 0 };
   }
 }

@@ -7,7 +7,7 @@ interface IMasonryItemProps {
   item: MasonryItemModel;
 }
 
-export const MasonryItem = ({ item }: IMasonryItemProps) => {
+export const MasonryItem = React.memo(({ item }: IMasonryItemProps) => {
   const containerStyles: React.CSSProperties = {
     width: item.width,
     height: item.height,
@@ -23,4 +23,4 @@ export const MasonryItem = ({ item }: IMasonryItemProps) => {
       </div>
     </div>
   );
-};
+});
