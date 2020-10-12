@@ -9,13 +9,15 @@ import "./Masonry.css";
 import { MasonryItemModel, useMasonry } from "../../hooks/useMasonry";
 import { MasonryItem } from "../masonryItem/MasonryItem";
 import { debounce } from "../../utils/debounce";
+import { Box, Spinner, Flex } from "@chakra-ui/core";
 
 interface IMasonryProps {
-  items: Array<MasonryItemModel>;
   numberOfColumns: number;
+  isLoading: boolean;
+  items: Array<MasonryItemModel>;
 }
 
-export function Masonry({ numberOfColumns, items }: IMasonryProps) {
+export function Masonry({ numberOfColumns, items, isLoading }: IMasonryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const { masonry, masonryHeight } = useMasonry(
@@ -48,12 +50,32 @@ export function Masonry({ numberOfColumns, items }: IMasonryProps) {
     setContainerWidth(rect.width);
   }, []);
 
+  const paddingBottom = isLoading ? 0 : 80;
+
   return (
-    <div ref={containerRef} id="container" style={{ height: masonryHeight }}>
-      {masonry &&
-        masonry.map((item, i) => {
-          return <MasonryItem item={item} key={item.id} />;
-        })}
-    </div>
+    <>
+      <Box
+        ref={containerRef}
+        id="container"
+        style={{ height: `${masonryHeight + paddingBottom}px` }}
+      >
+        {masonry &&
+          masonry.map((item, i) => {
+            return <MasonryItem item={item} key={item.id} />;
+          })}
+      </Box>
+
+      {isLoading && (
+        <Flex height="80px" align="center" justifyContent="center">
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        </Flex>
+      )}
+    </>
   );
 }
