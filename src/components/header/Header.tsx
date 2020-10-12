@@ -7,7 +7,6 @@ import {
   FormLabel,
   Flex,
   Heading,
-  Stack,
   Box,
 } from "@chakra-ui/core";
 import { MasonryItemModel } from "../../hooks/useMasonry";
