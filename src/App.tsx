@@ -11,17 +11,20 @@ import { getAPIItems } from "./utils/data";
 export function App() {
   const [numberOfColumns, setNumberOfColumns] = useState<number>(3);
   const [items, setItems] = useState<Array<MasonryItemModel>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     loadItems();
   }, []);
 
   const loadItems = async () => {
+    setIsLoading(true);
     await sleep(300);
 
     const newItems = items.concat(getAPIItems());
 
     setItems(newItems);
+    setIsLoading(false);
   };
 
   return (
@@ -31,6 +34,7 @@ export function App() {
           updateNumberOfColumns={setNumberOfColumns}
           numberOfColumns={numberOfColumns}
           addMoreItems={loadItems}
+          isLoading={isLoading}
         />
 
         <Masonry numberOfColumns={numberOfColumns} items={items} />
