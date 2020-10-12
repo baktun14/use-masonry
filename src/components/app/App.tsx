@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Header } from "../header/Header";
 import { Masonry } from "../masonry/Masonry";
-import { ThemeProvider } from "@chakra-ui/core";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import { MasonryItemModel } from "../../hooks/useMasonry";
 import { sleep } from "../../utils/timerUtils";
 import { getAPIItems } from "../../utils/data";

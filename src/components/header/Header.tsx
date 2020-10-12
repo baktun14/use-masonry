@@ -8,6 +8,7 @@ import {
   Flex,
   Heading,
   Stack,
+  Box,
 } from "@chakra-ui/core";
 import { MasonryItemModel } from "../../hooks/useMasonry";
 import { shuffle } from "../../utils/data";
@@ -44,36 +45,36 @@ export function Header({
         React hook: use-masonry
       </Heading>
 
-      <Flex flexDirection="column" align="center" padding={15}>
-        <Stack spacing={3}>
-          <FormControl>
-            <FormLabel htmlFor="numOfCols">Number of colums</FormLabel>
-            <Input
-              value={numberOfColumns}
-              onChange={(event) =>
-                updateNumberOfColumns(Number(event.currentTarget.value))
-              }
-              type="number"
-              id="numOfCols"
-              min={1}
-              max={12}
-            />
-          </FormControl>
+      <Box padding="15px" textAlign="left">
+        <FormControl>
+          <FormLabel htmlFor="numOfCols">Number of colums</FormLabel>
+          <Input
+            value={numberOfColumns}
+            onChange={(event) =>
+              updateNumberOfColumns(Number(event.currentTarget.value))
+            }
+            type="number"
+            id="numOfCols"
+            min={1}
+            max={12}
+            width="-webkit-fill-available"
+          />
+        </FormControl>
 
-          <FormControl>
-            <FormLabel htmlFor="masonryPadding">Gutter padding</FormLabel>
-            <Input
-              value={masonryPadding}
-              onChange={(event) =>
-                updateMasonryPadding(Number(event.currentTarget.value))
-              }
-              type="number"
-              id="masonryPadding"
-              min={0}
-              max={20}
-            />
-          </FormControl>
-        </Stack>
+        <FormControl>
+          <FormLabel htmlFor="masonryPadding">Gutter padding</FormLabel>
+          <Input
+            value={masonryPadding}
+            onChange={(event) =>
+              updateMasonryPadding(Number(event.currentTarget.value))
+            }
+            type="number"
+            id="masonryPadding"
+            min={0}
+            max={20}
+            width="-webkit-fill-available"
+          />
+        </FormControl>
 
         <Flex marginTop={15} flexDirection="column">
           <Button
@@ -95,7 +96,7 @@ export function Header({
             Suffle
           </Button>
         </Flex>
-      </Flex>
+      </Box>
     </header>
   );
 }
