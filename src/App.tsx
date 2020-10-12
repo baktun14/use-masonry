@@ -6,7 +6,7 @@ import { Masonry } from "./components/masonry/Masonry";
 import { ThemeProvider } from "@chakra-ui/core";
 import { MasonryItemModel } from "./hooks/useMasonry";
 import { sleep } from "./utils/timerUtils";
-import { APIItems } from "./utils/data";
+import { getAPIItems } from "./utils/data";
 
 export function App() {
   const [numberOfColumns, setNumberOfColumns] = useState<number>(3);
@@ -19,7 +19,9 @@ export function App() {
   const loadItems = async () => {
     await sleep(300);
 
-    setItems(items.concat(APIItems));
+    const newItems = items.concat(getAPIItems());
+
+    setItems(newItems);
   };
 
   return (

@@ -52,7 +52,7 @@ export function Masonry({ numberOfColumns, items }: IMasonryProps) {
     <div ref={containerRef} id="container" style={{ height: masonryHeight }}>
       {masonry &&
         masonry.map((item, i) => {
-          return <MasonryItem item={item} key={i} />;
+          return <MasonryItem item={item} key={item.id} />;
         })}
     </div>
   );

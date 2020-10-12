@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 export interface MasonryItemModel {
-  id: string;
+  id?: string;
   originalWidth: number;
   originalHeight: number;
   width?: number;
@@ -23,6 +23,7 @@ export const useMasonry = (
 
 interface MasonryColumn {
   index: number;
+  colHeight: number;
   items: Array<MasonryItemModel>
 }
 
@@ -32,32 +33,24 @@ function calculateMasonry(items: Array<MasonryItemModel>, containerWidth: number
     const masonry: Array<MasonryColumn> = [];
 
     for (let i = 0; i < numberOfColumns; i++) {
-      masonry.push({ index: i, items: [] });
+      masonry.push({ index: i, colHeight: 0, items: [] });
     }
 
     const insertInMasonry = (item: MasonryItemModel) => {
-      const computeColHeight = (col: MasonryColumn) => {
-        const lastItem = col.items[col.items.length - 1];
-        const colHeight = col.items.length >= 1
-          ? lastItem.top + lastItem.height
-          : 0;
-
-        return colHeight;
-      }
-      const shortesCol = masonry.sort(c => c.index).minBy(col => computeColHeight(col));
-      const colIndex = masonry.findIndex((val, i) => shortesCol?.index === val.index);
+      const shortesCol = masonry.sort(c => c.index).minBy(col => col.colHeight);
+      const colIndex = masonry.findIndex((val, i) => shortesCol.index === val.index);
       const currentLastColItem: MasonryItemModel = shortesCol.items[shortesCol.items.length - 1] || {};
       const hasLastColItem = Object.keys(currentLastColItem).length > 0 && currentLastColItem.constructor === Object;
+      const newItem: MasonryItemModel = {
+        ...item,
+        top: hasLastColItem ? currentLastColItem.top + currentLastColItem.height : 0,
+        left: colIndex * colWidth
+      }
 
       masonry[colIndex] = {
         ...masonry[colIndex],
-        items: [
-          ...shortesCol.items, {
-            ...item,
-            colIndex,
-            top: hasLastColItem ? currentLastColItem.top + currentLastColItem.height : 0,
-            left: colIndex * colWidth
-          }]
+        colHeight: newItem.top + newItem.height,
+        items: [...shortesCol.items, newItem]
       };
     }
 
