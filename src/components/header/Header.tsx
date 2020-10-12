@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Header.css";
 import {
   Button,
@@ -7,7 +7,6 @@ import {
   FormLabel,
   Flex,
   Heading,
-  Box,
 } from "@chakra-ui/core";
 import { MasonryItemModel } from "../../hooks/useMasonry";
 import { shuffle } from "../../utils/data";

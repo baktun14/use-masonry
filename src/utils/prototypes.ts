@@ -8,16 +8,18 @@ declare global {
 
 export const setupPrototypes = () => {
 
-  // Array<any>.reduce(callbackfn: (previousValue: any, currentValue: any, currentIndex: number, array: any[]) => any): any (+2 overloads)
   if (!Array.prototype.minBy) {
+    // eslint-disable-next-line
     Array.prototype.minBy = function (fn) { return this.extremumBy(fn, Math.min); };
   }
 
   if (!Array.prototype.maxBy) {
+    // eslint-disable-next-line
     Array.prototype.maxBy = function (fn) { return this.extremumBy(fn, Math.max); };
   }
 
   if (!Array.prototype.extremumBy) {
+    // eslint-disable-next-line
     Array.prototype.extremumBy = function (pluck, extremum) {
       return this.reduce(function (best, next) {
         var pair = [pluck(next), next];

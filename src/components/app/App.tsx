@@ -14,10 +14,13 @@ export function App() {
 
   useEffect(() => {
     loadItems();
+    // eslint-disable-next-line
   }, []);
 
   const loadItems = async () => {
     setIsLoading(true);
+
+    // fake a slow http request
     await sleep(1000);
 
     const newItems = items.concat(getAPIItems());

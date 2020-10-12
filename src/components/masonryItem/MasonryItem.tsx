@@ -19,6 +19,7 @@ export const MasonryItem = React.memo(({ item }: IMasonryItemProps) => {
       <div className="masonry-item-container">
         <img
           src={`http://placehold.it/${item.originalWidth}x${item.originalHeight}`}
+          alt={`An placehold.it of size ${item.originalWidth} pixel by ${item.originalHeight} pixel`}
         />
       </div>
     </div>

@@ -28,6 +28,7 @@ export function Masonry({ numberOfColumns, items, isLoading }: IMasonryProps) {
 
   useLayoutEffect(() => {
     updateContainerWidth();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export function Masonry({ numberOfColumns, items, isLoading }: IMasonryProps) {
     return () => {
       window.removeEventListener("resize", debouncedResize);
     };
+    // eslint-disable-next-line
   }, []);
 
   const updateContainerWidth = useCallback(() => {
