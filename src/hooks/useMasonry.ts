@@ -33,8 +33,8 @@ interface MasonryColumn {
   items: Array<MasonryItemModel>
 }
 
-function calculateMasonry(items: Array<MasonryItemModel>, containerWidth: number, numberOfColumns: number) {
-  if (containerWidth && containerWidth > 0 && items && items.length > 0) {
+function calculateMasonry(items: Array<MasonryItemModel>, containerWidth: number, numberOfColumns: number = 3) {
+  if (containerWidth && containerWidth > 0 && items && items.length > 0 && numberOfColumns > 0) {
     const colWidth: number = Math.round(containerWidth / numberOfColumns);
     const masonry: Array<MasonryColumn> = [];
 
