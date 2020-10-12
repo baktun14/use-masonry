@@ -18,7 +18,12 @@ interface IMasonryProps {
   items: Array<MasonryItemModel>;
 }
 
-export function Masonry({ numberOfColumns, items, isLoading, masonryPadding }: IMasonryProps) {
+export function Masonry({
+  numberOfColumns,
+  items,
+  isLoading,
+  masonryPadding,
+}: IMasonryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const { masonry, masonryHeight } = useMasonry(
@@ -53,7 +58,7 @@ export function Masonry({ numberOfColumns, items, isLoading, masonryPadding }: I
     setContainerWidth(rect.width);
   }, []);
 
-  const paddingBottom = isLoading ? 0 : 80;
+  const paddingBottom = isLoading ? 0 : 100;
 
   return (
     <>
@@ -64,12 +69,18 @@ export function Masonry({ numberOfColumns, items, isLoading, masonryPadding }: I
       >
         {masonry &&
           masonry.map((item, i) => {
-            return <MasonryItem item={item} key={item.id} masonryPadding={masonryPadding} />;
+            return (
+              <MasonryItem
+                item={item}
+                key={item.id}
+                masonryPadding={masonryPadding}
+              />
+            );
           })}
       </Box>
 
       {isLoading && (
-        <Flex height="80px" align="center" justifyContent="center">
+        <Flex height="100px" align="center" justifyContent="center">
           <Spinner
             thickness="4px"
             speed="0.65s"
