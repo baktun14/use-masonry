@@ -9,12 +9,16 @@ import {
   Heading,
   Box,
 } from "@chakra-ui/core";
+import { MasonryItemModel } from "../../hooks/useMasonry";
+import { shuffle } from "../../utils/data";
 
 interface IHeaderProps {
   numberOfColumns: number;
   isLoading: boolean;
+  items: Array<MasonryItemModel>;
   updateNumberOfColumns: (numberOfColumns: number) => any;
   addMoreItems: () => any;
+  updateItems: (items: Array<MasonryItemModel>) => void;
 }
 
 export function Header({
@@ -22,7 +26,14 @@ export function Header({
   numberOfColumns,
   addMoreItems,
   isLoading,
+  updateItems,
+  items,
 }: IHeaderProps) {
+  const shuffleItems = () => {
+    const newItems = shuffle(items);
+    updateItems([...newItems]);
+  };
+
   return (
     <header className="App-header">
       <Heading as="h1" size="2xl">
@@ -44,16 +55,26 @@ export function Header({
           />
         </FormControl>
 
-        <Box marginTop={15}>
+        <Flex marginTop={15} flexDirection="column">
           <Button
             onClick={() => addMoreItems()}
             variantColor="teal"
             variant="solid"
             isLoading={isLoading}
+            marginBottom="5px"
           >
             Add more items
           </Button>
-        </Box>
+
+          <Button
+            onClick={() => shuffleItems()}
+            variantColor="teal"
+            variant="solid"
+            isLoading={isLoading}
+          >
+            Suffle
+          </Button>
+        </Flex>
       </Flex>
     </header>
   );

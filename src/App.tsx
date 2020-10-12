@@ -27,6 +27,10 @@ export function App() {
     setIsLoading(false);
   };
 
+  const updateItems = (newItems: Array<MasonryItemModel>) => {
+    setItems(newItems);
+  };
+
   return (
     <ThemeProvider>
       <div className="App">
@@ -35,6 +39,8 @@ export function App() {
           numberOfColumns={numberOfColumns}
           addMoreItems={loadItems}
           isLoading={isLoading}
+          updateItems={updateItems}
+          items={items}
         />
 
         <Masonry numberOfColumns={numberOfColumns} items={items} />
