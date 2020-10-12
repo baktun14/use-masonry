@@ -13,11 +13,12 @@ import { Box, Spinner, Flex } from "@chakra-ui/core";
 
 interface IMasonryProps {
   numberOfColumns: number;
+  masonryPadding: number;
   isLoading: boolean;
   items: Array<MasonryItemModel>;
 }
 
-export function Masonry({ numberOfColumns, items, isLoading }: IMasonryProps) {
+export function Masonry({ numberOfColumns, items, isLoading, masonryPadding }: IMasonryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const { masonry, masonryHeight } = useMasonry(
@@ -63,7 +64,7 @@ export function Masonry({ numberOfColumns, items, isLoading }: IMasonryProps) {
       >
         {masonry &&
           masonry.map((item, i) => {
-            return <MasonryItem item={item} key={item.id} />;
+            return <MasonryItem item={item} key={item.id} masonryPadding={masonryPadding} />;
           })}
       </Box>
 

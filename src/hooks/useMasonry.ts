@@ -15,17 +15,16 @@ export interface MasonryItemModel {
  * @param items An array of objects containing the original width and height of the image
  * @param containerWidth The width of the masonry container, usually the parent div
  * @param numberOfColumns The number of columns for the masonry
- * @param gutterPadding The padding between the masonry items
  */
 export const useMasonry = (
   items: Array<MasonryItemModel>,
   containerWidth: number,
-  numberOfColumns: number = 3,
-  gutterPadding: number = 5)
+  numberOfColumns: number = 3
+)
   : { masonry: MasonryItemModel[], masonryHeight: number } => {
   return useMemo(() =>
-    calculateMasonry(items, containerWidth, numberOfColumns, gutterPadding),
-    [items, containerWidth, numberOfColumns, gutterPadding]);
+    calculateMasonry(items, containerWidth, numberOfColumns),
+    [items, containerWidth, numberOfColumns]);
 }
 
 interface MasonryColumn {
@@ -34,9 +33,9 @@ interface MasonryColumn {
   items: Array<MasonryItemModel>
 }
 
-function calculateMasonry(items: Array<MasonryItemModel>, containerWidth: number, numberOfColumns: number, gutterPadding: number) {
+function calculateMasonry(items: Array<MasonryItemModel>, containerWidth: number, numberOfColumns: number) {
   if (containerWidth && containerWidth > 0 && items && items.length > 0) {
-    const colWidth: number = containerWidth / numberOfColumns;
+    const colWidth: number = Math.round(containerWidth / numberOfColumns);
     const masonry: Array<MasonryColumn> = [];
 
     // Populate the masonry structure for each columns
@@ -69,7 +68,7 @@ function calculateMasonry(items: Array<MasonryItemModel>, containerWidth: number
 
     items.forEach(item => {
       const ratio = item.originalHeight / item.originalWidth;
-      const height = Math.round((colWidth - gutterPadding) * ratio);
+      const height = Math.round(colWidth * ratio);
       const width = colWidth;
 
       insertInMasonry({

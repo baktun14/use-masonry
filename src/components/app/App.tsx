@@ -9,6 +9,7 @@ import { getAPIItems } from "../../utils/data";
 
 export function App() {
   const [numberOfColumns, setNumberOfColumns] = useState<number>(3);
+  const [masonryPadding, setMasonryPadding] = useState<number>(5);
   const [items, setItems] = useState<Array<MasonryItemModel>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -43,12 +44,15 @@ export function App() {
           isLoading={isLoading}
           updateItems={updateItems}
           items={items}
+          masonryPadding={masonryPadding}
+          updateMasonryPadding={setMasonryPadding}
         />
 
         <Masonry
           numberOfColumns={numberOfColumns}
           items={items}
           isLoading={isLoading}
+          masonryPadding={masonryPadding}
         />
       </div>
     </ThemeProvider>
